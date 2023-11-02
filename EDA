@@ -1,0 +1,40 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Read the dataset into a Pandas DataFrame
+df = pd.read_csv('customer_purchase_data.csv')
+
+# Check for missing values and duplicate rows
+print("Missing values:\n", df.isnull().sum())
+print("Duplicate rows:", df.duplicated().sum())
+
+# Explore the data
+print("Data Overview:")
+print(df.head())
+print("\nData Info:")
+print(df.info())
+
+# Calculate some descriptive statistics
+print("\nDescriptive Statistics:")
+for col in df.columns:
+    print(f"{col}:\n{df[col].describe()}\n")
+
+# Create some visualizations
+plt.hist(df['spending'])
+plt.xlabel('Spending')
+plt.ylabel('Number of customers')
+plt.title('Distribution of customer spending')
+plt.show()
+
+plt.scatter(df['age'], df['spending'])
+plt.xlabel('Age')
+plt.ylabel('Spending')
+plt.title('Relationship between customer age and spending')
+plt.show()
+
+# Ask and answer questions about the data
+print("Mean Spending:", df['spending'].mean())
+print("Median Spending:", df['spending'].median())
+print("Most Common Product Category:", df['product_category'].value_counts().idxmax())
+print("Correlation between Age and Spending:", df['age'].corr(df['spending']))
